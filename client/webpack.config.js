@@ -16,7 +16,7 @@ module.exports = () => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: './src/index.html', // Set this to the path of your HTML template.
+        template: './index.html', // Set this to the path of your HTML template.
         filename: 'index.html', // Specify the output HTML file name.
       }),
       new WebpackPwaManifest({
@@ -27,7 +27,7 @@ module.exports = () => {
         theme_color: '#000000',
         icons: [
           {
-            src: path.resolve('src/assets/icon.png'),
+            src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
           },
         ],

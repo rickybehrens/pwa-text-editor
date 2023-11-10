@@ -10,22 +10,31 @@ const loadSpinner = () => {
   const spinner = document.createElement('div');
   spinner.classList.add('spinner');
   spinner.innerHTML = `
-  <div class="loading-container">
-  <div class="loading-spinner" />
-  </div>
+    <div class="loading-container">
+      <div class="loading-spinner" />
+    </div>
   `;
   main.appendChild(spinner);
 };
 
-const editor = new Editor();
+const initializeEditor = async () => {
+  try {
+    const editor = new Editor();
+    await editor.initialize(); // Assuming you add an initialize method to your Editor class
+    main.innerHTML = ''; // Clear the loading spinner or any previous content
+    main.appendChild(editor.editor); // Append the editor to the DOM
+  } catch (error) {
+    console.error('Error initializing editor:', error);
+    // Handle the error, perhaps display an error message
+  }
+};
 
-if (typeof editor === 'undefined') {
-  loadSpinner();
-}
+loadSpinner();
+initializeEditor();
 
 // Check if service workers are supported
 if ('serviceWorker' in navigator) {
-  // register workbox service worker
+  // Register Workbox service worker
   const workboxSW = new Workbox('/src-sw.js');
   workboxSW.register();
 } else {
