@@ -18,20 +18,25 @@ const loadSpinner = () => {
   main.appendChild(spinner);
 };
 
-const initializeEditor = async () => {
-  try {
-    const editor = new Editor();
-    await editor.initialize(); // Assuming you add an initialize method to your Editor class
-    main.innerHTML = ''; // Clear the loading spinner or any previous content
-    main.appendChild(editor.editor); // Append the editor to the DOM
-  } catch (error) {
-    console.error('Error initializing editor:', error);
-    // Handle the error, perhaps display an error message
-  }
-};
+// const initializeEditor = async () => {
+//   try {
+//     const editor = new Editor();
+//     await editor.initialize(); // Assuming you add an initialize method to your Editor class
+//     main.innerHTML = ''; // Clear the loading spinner or any previous content
+//     main.appendChild(editor.editor); // Append the editor to the DOM
+//   } catch (error) {
+//     console.error('Error initializing editor:', error);
+//     // Handle the error, perhaps display an error message
+//   }
+// };
 
-loadSpinner();
-initializeEditor();
+// loadSpinner();
+
+// initializeEditor();
+const editor = new Editor()
+if (typeof editor === "undefined") {
+  loadSpinner()
+}
 
 // Check if service workers are supported
 if ('serviceWorker' in navigator) {
