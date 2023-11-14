@@ -27,12 +27,13 @@ warmStrategyCache({
 registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
 // TODO: Implement asset caching
+// TODO: Implement asset caching
 registerRoute(
   // Define a regular expression pattern for the assets you want to cache
-  // For example, this pattern caches JavaScript and CSS files
-  /.*\.(js|css)/,
+  // For example, this pattern caches font files
+  /.*\.(woff|woff2|ttf|otf)/,
   new CacheFirst({
-    cacheName: 'asset-cache',
+    cacheName: 'font-cache',
     plugins: [
       new CacheableResponsePlugin({
         statuses: [0, 200],
@@ -43,8 +44,6 @@ registerRoute(
     ],
   })
 );
-
-// You can add more rules to cache other types of assets if needed
 
 // For example, to cache images, you can add another rule like this:
 registerRoute(

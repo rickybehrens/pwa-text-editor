@@ -22,8 +22,9 @@ module.exports = () => {
 
       new InjectManifest({
         swSrc: './src-sw.js', // Path to your service worker file.
-        swDest: 'src-sw.ls'
+        swDest: 'src-sw.js',  // Use .js extension for the service worker
       }),
+      
 
       new WebpackPwaManifest({
         fingerprints: false,
