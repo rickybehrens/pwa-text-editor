@@ -18,21 +18,30 @@ const loadSpinner = () => {
   main.appendChild(spinner);
 };
 
-// const initializeEditor = async () => {
-//   try {
-//     const editor = new Editor();
-//     await editor.initialize(); // Assuming you add an initialize method to your Editor class
-//     main.innerHTML = ''; // Clear the loading spinner or any previous content
-//     main.appendChild(editor.editor); // Append the editor to the DOM
-//   } catch (error) {
-//     console.error('Error initializing editor:', error);
-//     // Handle the error, perhaps display an error message
-//   }
-// };
+const initializeEditor = async () => {
+  try {
+    const editor = new Editor();
+    await editor.initialize();
+    main.innerHTML = ''; // Clear the loading spinner or any previous content
+    main.appendChild(editor.editor); // Append the editor to the DOM
 
-// loadSpinner();
+    // Load all items from IndexedDB
+    const allData = await getDb();
+    console.info('Loaded data from IndexedDB, injecting into editor');
+    
+    // Set the value of the editor to all loaded data
+    editor.editor.setValue(allData.join('\n'));
 
-// initializeEditor();
+  } catch (error) {
+    console.error('Error initializing editor:', error);
+    // Handle the error, perhaps display an error message
+  }
+};
+
+
+loadSpinner();
+
+initializeEditor();
 const editor = new Editor()
 if (typeof editor === "undefined") {
   loadSpinner()
